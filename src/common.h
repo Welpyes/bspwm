@@ -25,7 +25,9 @@
 #ifndef BSPWM_COMMON_H
 #define BSPWM_COMMON_H
 
-#define SOCKET_PATH_TPL  "/data/data/com.termux/files/usr/tmp/bspwm%s_%i_%i-socket"
+#ifndef SOCKET_PATH_TPL
+#define SOCKET_PATH_TPL  "/tmp/bspwm%s_%i_%i-socket"
+#endif
 #define SOCKET_ENV_VAR   "BSPWM_SOCKET"
 
 #define FAILURE_MESSAGE  "\x07"

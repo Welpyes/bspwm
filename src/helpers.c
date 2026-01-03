@@ -119,12 +119,16 @@ char *copy_string(char *str, size_t len)
 	return cpy;
 }
 
+#ifndef DEFAULT_RUNTIME_DIR
+#define DEFAULT_RUNTIME_DIR "/tmp"
+#endif
+
 char *mktempfifo(const char *template)
 {
 	int tempfd;
 	char *runtime_dir = getenv(RUNTIME_DIR_ENV);
 	if (runtime_dir == NULL) {
-		runtime_dir = "/data/data/com.termux/files/usr/tmp";
+		runtime_dir = DEFAULT_RUNTIME_DIR;
 	}
 
 	char *fifo_path = malloc(strlen(runtime_dir)+1+strlen(template)+1);

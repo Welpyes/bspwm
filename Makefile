@@ -2,9 +2,18 @@ VERCMD  ?= git describe --tags 2> /dev/null
 VERSION := $(shell $(VERCMD) || cat VERSION)
 
 CPPFLAGS += -D_POSIX_C_SOURCE=200809L -DVERSION=\"$(VERSION)\"
+
+# Termux detection and path adjustment
+ifneq ($(filter /data/data/com.termux/%, $(PREFIX)),)
+	TERMUX_TMP_DIR = /data/data/com.termux/files/usr/tmp
+	CPPFLAGS += -DSOCKET_PATH_TPL='"$(TERMUX_TMP_DIR)/bspwm%s_%i_%i-socket"'
+	CPPFLAGS += -DSTATE_PATH_TPL='"$(TERMUX_TMP_DIR)/bspwm%s_%i_%i-state"'
+	CPPFLAGS += -DDEFAULT_RUNTIME_DIR='"$(TERMUX_TMP_DIR)"'
+endif
+
 CFLAGS   += -std=c99 -pedantic -Wall -Wextra -DJSMN_STRICT
 LDFLAGS  ?=
-LDLIBS    = $(LDFLAGS) -lm -lxcb -lxcb-util -lxcb-keysyms -lxcb-icccm -lxcb-ewmh -lxcb-randr -lxcb-xinerama -lxcb-shape -lxcb-shape
+LDLIBS    = $(LDFLAGS) -lm -lxcb -lxcb-util -lxcb-keysyms -lxcb-icccm -lxcb-ewmh -lxcb-randr -lxcb-xinerama -lxcb-shape
 
 PREFIX    ?= /usr/local
 BINPREFIX ?= $(PREFIX)/bin
