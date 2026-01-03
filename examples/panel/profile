@@ -1,4 +1,4 @@
-PANEL_FIFO=/tmp/panel-fifo
+PANEL_FIFO=/data/data/com.termux/files/usr/tmp/panel-fifo
 PANEL_HEIGHT=24
 PANEL_FONT="-*-fixed-*-*-*-*-10-*-*-*-*-*-*-*"
 PANEL_WM_NAME=bspwm_panel

@@ -124,7 +124,7 @@ char *mktempfifo(const char *template)
 	int tempfd;
 	char *runtime_dir = getenv(RUNTIME_DIR_ENV);
 	if (runtime_dir == NULL) {
-		runtime_dir = "/tmp";
+		runtime_dir = "/data/data/com.termux/files/usr/tmp";
 	}
 
 	char *fifo_path = malloc(strlen(runtime_dir)+1+strlen(template)+1);
