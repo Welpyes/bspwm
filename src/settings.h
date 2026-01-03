@@ -41,6 +41,7 @@
 #define MONOCLE_PADDING      {0, 0, 0, 0}
 #define WINDOW_GAP           6
 #define BORDER_WIDTH         1
+#define BORDER_RADIUS        0
 #define SPLIT_RATIO          0.5
 #define AUTOMATIC_SCHEME     SCHEME_LONGEST_SIDE
 #define REMOVAL_ADJUSTMENT   true
@@ -61,7 +62,7 @@
 #define IGNORE_EWMH_STRUTS          false
 
 #define CENTER_PSEUDO_TILED         true
-#define HONOR_SIZE_HINTS            HONOR_SIZE_HINTS_NO
+#define HONOR_SIZE_HINTS            HONOR_SIZE_HINTS_DEFAULT
 #define MAPPING_EVENTS_COUNT        1
 
 #define REMOVE_DISABLED_MONITORS    false
@@ -80,6 +81,7 @@ extern padding_t padding;
 extern padding_t monocle_padding;
 extern int window_gap;
 extern unsigned int border_width;
+extern unsigned int border_radius;
 extern double split_ratio;
 extern child_polarity_t initial_polarity;
 extern automatic_scheme_t automatic_scheme;

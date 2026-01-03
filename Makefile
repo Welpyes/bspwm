@@ -4,7 +4,7 @@ VERSION := $(shell $(VERCMD) || cat VERSION)
 CPPFLAGS += -D_POSIX_C_SOURCE=200809L -DVERSION=\"$(VERSION)\"
 CFLAGS   += -std=c99 -pedantic -Wall -Wextra -DJSMN_STRICT
 LDFLAGS  ?=
-LDLIBS    = $(LDFLAGS) -lm -lxcb -lxcb-util -lxcb-keysyms -lxcb-icccm -lxcb-ewmh -lxcb-randr -lxcb-xinerama -lxcb-shape
+LDLIBS    = $(LDFLAGS) -lm -lxcb -lxcb-util -lxcb-keysyms -lxcb-icccm -lxcb-ewmh -lxcb-randr -lxcb-xinerama -lxcb-shape -lxcb-shape
 
 PREFIX    ?= /usr/local
 BINPREFIX ?= $(PREFIX)/bin
