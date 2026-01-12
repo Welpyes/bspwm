@@ -1515,6 +1515,14 @@ void set_setting(coordinates_t loc, char *name, char *value, FILE *rsp)
 			return;
 		}
 		SET_DEF_DEFMON_DEFDESK_WIN(border_radius, br)
+	} else if (streq("fill_border", name)) {
+		bool fb;
+		if (parse_bool(value, &fb)) {
+			SET_DEF_DEFMON_DEFDESK_WIN(fill_border, fb)
+		} else {
+			fail(rsp, "config: %s: Invalid value: '%s'.\n", name, value);
+			return;
+		}
 #undef SET_DEF_DEFMON_DEFDESK_WIN
 #define SET_DEF_WIN(k, v) \
 		if (loc.node != NULL) { \
@@ -1864,6 +1872,21 @@ void get_setting(coordinates_t loc, char *name, FILE* rsp)
 			fprintf(rsp, "%u", loc.monitor->border_radius);
 		} else {
 			fprintf(rsp, "%u", border_radius);
+		}
+	} else if (streq("fill_border", name)) {
+		if (loc.node != NULL) {
+			for (node_t *n = first_extrema(loc.node); n != NULL; n = next_leaf(n, loc.node)) {
+				if (n->client != NULL) {
+					fprintf(rsp, "%s", BOOL_STR(n->client->fill_border));
+					break;
+				}
+			}
+		} else if (loc.desktop != NULL) {
+			fprintf(rsp, "%s", BOOL_STR(loc.desktop->fill_border));
+		} else if (loc.monitor != NULL) {
+			fprintf(rsp, "%s", BOOL_STR(loc.monitor->fill_border));
+		} else {
+			fprintf(rsp, "%s", BOOL_STR(fill_border));
 		}
 	} else if (streq("window_gap", name)) {
 		if (loc.desktop != NULL) {

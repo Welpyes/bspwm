@@ -760,6 +760,7 @@ client_t *make_client(void)
 	snprintf(c->instance_name, sizeof(c->instance_name), "%s", MISSING_VALUE);
 	c->border_width = border_width;
 	c->border_radius = border_radius;
+	c->fill_border = fill_border;
 	c->urgent = false;
 	c->shown = false;
 	c->sets_own_shape = false;

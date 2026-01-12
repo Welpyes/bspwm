@@ -138,6 +138,7 @@ bool manage_window(xcb_window_t win, rule_consequence_t *csq, int fd)
 	client_t *c = make_client();
 	c->border_width = csq->border ? d->border_width : 0;
 	c->border_radius = d->border_radius;
+	c->fill_border = d->fill_border;
 	n->client = c;
 	initialize_client(n);
 	initialize_floating_rectangle(n);
@@ -1067,10 +1068,17 @@ void window_rounded_border(node_t *n)
 		{ 0, rad, w, h-dia },
 	};
 
-	xcb_rectangle_t bounding = {0, 0, w+2*bw, h+2*bw};
-	xcb_poly_fill_rectangle(dpy, bpid, black, 1, &bounding);
-	xcb_poly_fill_rectangle(dpy, bpid, white, 2, brects);
 	xcb_poly_fill_arc(dpy, bpid, white, 4, barcs);
+
+	if (!n->client->fill_border) {
+		xcb_rectangle_t bounding = {0, 0, w+2*bw, h+2*bw};
+		xcb_poly_fill_rectangle(dpy, bpid, black, 1, &bounding);
+		xcb_poly_fill_rectangle(dpy, bpid, white, 2, brects);
+		xcb_poly_fill_arc(dpy, bpid, white, 4, barcs);
+	} else {
+		xcb_rectangle_t bounding = {0, 0, w+2*bw, h+2*bw};
+		xcb_poly_fill_rectangle(dpy, bpid, white, 1, &bounding);
+	}
 
 	xcb_rectangle_t clipping = {0, 0, w, h};
 	xcb_poly_fill_rectangle(dpy, cpid, black, 1, &clipping);

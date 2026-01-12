@@ -42,6 +42,7 @@
 #define WINDOW_GAP           6
 #define BORDER_WIDTH         1
 #define BORDER_RADIUS        0
+#define FILL_BORDER          false
 #define SPLIT_RATIO          0.5
 #define AUTOMATIC_SCHEME     SCHEME_LONGEST_SIDE
 #define REMOVAL_ADJUSTMENT   true
@@ -82,6 +83,7 @@ extern padding_t monocle_padding;
 extern int window_gap;
 extern unsigned int border_width;
 extern unsigned int border_radius;
+extern bool fill_border;
 extern double split_ratio;
 extern child_polarity_t initial_polarity;
 extern automatic_scheme_t automatic_scheme;

@@ -226,6 +226,7 @@ typedef struct {
 	unsigned int border_width;
 	unsigned int border_radius;
 	unsigned int drawn_border_radius;
+	bool fill_border;
 	bool urgent;
 	bool shown;
 	bool sets_own_shape;
@@ -296,6 +297,7 @@ struct desktop_t {
 	int window_gap;
 	unsigned int border_width;
 	unsigned int border_radius;
+	bool fill_border;
 };
 
 typedef struct monitor_t monitor_t;
@@ -310,6 +312,7 @@ struct monitor_t {
 	int window_gap;
 	unsigned int border_width;
 	unsigned int border_radius;
+	bool fill_border;
 	xcb_rectangle_t rectangle;
 	desktop_t *desk;
 	desktop_t *desk_head;
