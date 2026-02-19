@@ -1,5 +1,18 @@
 ## Description
 
+### modified to have rounded corners using Xshape extention
+
+bspc now supports these commands
+```
+bspc config border_radius 1
+bspc config fill_border true
+```
+
+- `fill_border <bool>` makes it so it doesnt cut out the widow borders and only rounds the window itself
+- `border_radius <int>` rounds the borders using Xshape and doesnt do anti-aliasing
+
+---
+
 *bspwm* is a tiling window manager that represents windows as the leaves of a full binary tree.
 
 It only responds to X events, and the messages it receives on a dedicated socket.
@@ -83,7 +96,7 @@ Let's consider the following scenario:
 |           |           |  |           |           |  |           |           |
 +-----------------------+  +-----------------------+  +-----------------------+
 
-            X                          Y                          Z 
+            X                          Y                          Z
 ```
 
 In state *X*, the insertion point is *1*.
