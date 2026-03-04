@@ -91,6 +91,7 @@ bool manage_window(xcb_window_t win, rule_consequence_t *csq, int fd)
 		free(csq->layer);
 		free(csq->state);
 		window_show(win);
+		stack_ensure_above_docks();
 		return false;
 	}
 
@@ -889,6 +890,12 @@ void window_stack(xcb_window_t w1, xcb_window_t w2, uint32_t mode)
 void window_above(xcb_window_t w1, xcb_window_t w2)
 {
 	window_stack(w1, w2, XCB_STACK_MODE_ABOVE);
+}
+
+void window_raise(xcb_window_t win)
+{
+	uint32_t values[] = {XCB_STACK_MODE_ABOVE};
+	xcb_configure_window(dpy, win, XCB_CONFIG_WINDOW_STACK_MODE, values);
 }
 
 /* Stack w1 below w2 */

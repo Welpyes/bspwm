@@ -162,6 +162,27 @@ stacking_list_t *limit_below(node_t *n)
 	return s;
 }
 
+void stack_ensure_above_docks(void)
+{
+	stacking_list_t *s = stack_head;
+	while (s != NULL && (!s->node->client->shown || stack_level(s->node->client) < 5)) {
+		s = s->next;
+	}
+
+	if (s != NULL) {
+		window_raise(s->node->id);
+		stacking_list_t *last = s;
+		s = s->next;
+		while (s != NULL) {
+			if (s->node->client->shown) {
+				window_above(s->node->id, last->node->id);
+				last = s;
+			}
+			s = s->next;
+		}
+	}
+}
+
 void stack(desktop_t *d, node_t *n, bool focused)
 {
 	for (node_t *f = first_extrema(n); f != NULL; f = next_leaf(f, n)) {
@@ -188,6 +209,8 @@ void stack(desktop_t *d, node_t *n, bool focused)
 			}
 		}
 	}
+
+	stack_ensure_above_docks();
 
 	ewmh_update_client_list(true);
 	restack_presel_feedbacks(d);

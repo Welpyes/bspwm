@@ -64,6 +64,7 @@ void window_move_resize(xcb_window_t win, int16_t x, int16_t y, uint16_t w, uint
 void window_center(monitor_t *m, client_t *c);
 void window_stack(xcb_window_t w1, xcb_window_t w2, uint32_t mode);
 void window_above(xcb_window_t w1, xcb_window_t w2);
+void window_raise(xcb_window_t win);
 void window_below(xcb_window_t w1, xcb_window_t w2);
 void window_lower(xcb_window_t win);
 void window_set_visibility(xcb_window_t win, bool visible);

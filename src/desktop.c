@@ -31,6 +31,7 @@
 #include "monitor.h"
 #include "query.h"
 #include "tree.h"
+#include "stack.h"
 #include "window.h"
 #include "desktop.h"
 #include "subscribe.h"
@@ -532,6 +533,7 @@ void show_desktop(desktop_t *d)
 		return;
 	}
 	show_node(d, d->root);
+	stack_ensure_above_docks();
 }
 
 void hide_desktop(desktop_t *d)
